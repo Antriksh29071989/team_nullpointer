@@ -9,5 +9,6 @@ version = "0.1.0"
 description = "demo app"
 dependencies = [
     "mcp>=1.14.0",
+    "openrouteservice>=2.3.3",
     "requests==2.31.0",
 ]
