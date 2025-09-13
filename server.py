@@ -1,6 +1,3 @@
-import nest_asyncio
-nest_asyncio.apply()
-
 from mcp.server.fastmcp import FastMCP
 from datetime import datetime, timedelta
 import json
@@ -11,7 +8,8 @@ import os
 
 from dotenv import load_dotenv
 load_dotenv() 
-mcp = FastMCP("DemoServer")
+
+mcp = FastMCP("Echo Server", port=3000, stateless_http=True, debug=True)
  
 
 @mcp.tool()
@@ -163,5 +161,5 @@ async def search_confluence_solution(title: str) -> str:
 if __name__ == "__main__":
     # Initialize and run the server
     print("Starting MCP server...")
-    mcp.run(transport='stdio')
+    mcp.run(transport="streamable-http")
     print("MCP server started.")
