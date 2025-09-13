@@ -157,6 +157,8 @@ async def search_confluence_solution(title: str) -> str:
     # Return formatted string
     return f"Solution found: {page_title}\nURL: {page_url}\nContent:\n{content}"
 
+def lambda_handler(event, context):
+    return mcp.handle_lambda_event(event, context)
 
 if __name__ == "__main__":
     # Initialize and run the server
