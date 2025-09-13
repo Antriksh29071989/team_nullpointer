@@ -5,6 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "warroom-demo"
 version = "0.1.0"
+description = "demo app"
 dependencies = [
     "requests==2.31.0",
     "numpy==1.26.0"
