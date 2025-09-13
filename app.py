@@ -9,7 +9,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv() 
 
-mcp = FastMCP("Echo Server", port=3000, stateless_http=True, debug=True)
+mcp = FastMCP("fastfix Server")
  
 
 @mcp.tool()
@@ -157,11 +157,15 @@ async def search_confluence_solution(title: str) -> str:
     # Return formatted string
     return f"Solution found: {page_title}\nURL: {page_url}\nContent:\n{content}"
 
-def lambda_handler(event, context):
-    return mcp.handle_lambda_event(event, context)
-
 if __name__ == "__main__":
-    # Initialize and run the server
-    print("Starting MCP server...")
-    mcp.run(transport="streamable-http")
-    print("MCP server started.")
+    try:
+        print("started")
+        # mcp.run(transport="stdio")  # or stdioz
+        mcp.run(transport="streamable-http")     # enable streaming if supported
+    except Exception as e:
+        # Log to stderr instead of stdout
+        import traceback
+        import sys
+        traceback.print_exc(file=sys.stderr)
+        # Exit with non-zero code
+        sys.exit(1)

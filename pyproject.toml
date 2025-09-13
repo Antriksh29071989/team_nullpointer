@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 requires-python = ">=3.10"
 name = "warroom-demo"
 version = "0.1.0"
-description = "demo app"
+description = "demo app"    
 dependencies = [
     "mcp>=1.14.0",
     "openrouteservice>=2.3.3",
