@@ -53,8 +53,8 @@ def grafana(text: str = Field(description="The text to echo")) -> str:
  @mcp.tool(title="Jira Tool",
     description="create JIRA issue",
 )
-def jira(grafana_alert_json: str = Field(description="Create JIRA issue ") ) -> str:
-    grafana_alert = json.loads(grafana_alert_json)
+def jira(alert: str = Field(description="Create JIRA issue ") ) -> str:
+    grafana_alert = json.loads(alert)
     return grafana_alert
         
     # except json.JSONDecodeError:
