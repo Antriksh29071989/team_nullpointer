@@ -20,7 +20,7 @@ def echo(text: str = Field(description="The text to echo")) -> str:
 
 @mcp.tool(title="grafana issue",
     description="Tool Description for the grafana")
-def get_grafana_issues() -> str:
+def grafana() -> str:
     """Get dummy Grafana issue for demonstration.
     
     Returns a sample Grafana issue.
