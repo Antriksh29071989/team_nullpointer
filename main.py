@@ -54,8 +54,8 @@ def grafana(text: str = Field(description="The text to echo")) -> str:
     description="create JIRA issue",
 )
 def jira(alert: str = Field(description="Create JIRA issue ") ) -> str:
-    grafana_alert = json.loads(alert)
-    return grafana_alert
+    # grafana_alert = json.loads(alert)
+    return "good"
         
     # except json.JSONDecodeError:
     #     return "Invalid JSON input"
