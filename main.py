@@ -50,6 +50,71 @@ def grafana(text: str = Field(description="The text to echo")) -> str:
    # Return as JSON string
     return json.dumps(issue)
 
+ @mcp.tool(title="Jira Tool",
+    description="create JIRA issue",
+))
+def create_jira_issue(grafana_alert_json: str = Field(description="Create JIRA issue ") ) -> str:
+    """
+    MCP tool to create a Jira issue from a Grafana alert JSON.
+
+    Args:
+        grafana_alert_json (str): JSON string of Grafana alert
+
+    Returns:
+        str: Jira issue URL or error message
+
+    """
+
+    try:
+        grafana_alert = json.loads(grafana_alert_json)
+        
+    except json.JSONDecodeError:
+        return "Invalid JSON input"
+
+    # Extract server name from description if possible
+    server_match = re.search(r"server-[\w\-]+", grafana_alert.get("description", ""))
+    server_name = server_match.group(0) if server_match else "Unknown Server"
+
+    # Construct Jira payload
+    jira_payload = {
+        "fields": {
+            "project": {"key": JIRA_PROJECT_KEY},
+            "summary": f"{grafana_alert.get('title', 'No Title')} on {server_name}",
+            "description": f"""
+{grafana_alert.get('description', '')}
+
+Grafana Issue ID: {grafana_alert.get('id', '')}
+Severity: {grafana_alert.get('severity', '')}
+Status: {grafana_alert.get('status', '')}
+Created: {grafana_alert.get('created_at', '')}
+Updated: {grafana_alert.get('updated_at', '')}
+Tags: {', '.join(grafana_alert.get('tags', []))}
+Assigned to: {grafana_alert.get('assigned_to', '')}
+""",
+            "issuetype": {"name": "Epic"},
+            "labels": grafana_alert.get('tags', []) 
+        }
+    }
+
+    # Jira REST API endpoint
+    jira_url = f"{JIRA_DOMAIN}/rest/api/2/issue/"
+
+    # Send request
+    response = requests.post(
+        jira_url,
+        auth=HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN),
+        headers={"Content-Type": "application/json"},
+        data=json.dumps(jira_payload)
+    )
+
+    if response.status_code == 201:
+        issue_key = response.json()['key']
+        return f"Jira issue created successfully! Issue URL: {JIRA_DOMAIN}/browse/{issue_key}"
+    else:
+        return f"Failed to create Jira issue. Status: {response.status_code}, Response: {response.text}"
+
+
+
 
 @mcp.resource(
     uri="greeting://{name}",
