@@ -50,12 +50,12 @@ def grafana(text: str = Field(description="The text to echo")) -> str:
    # Return as JSON string
     return json.dumps(issue)
 
- @mcp.tool(title="Jira Tool",
+@mcp.tool(title="Jira Tool",
     description="create JIRA issue",
 )
 def jira(alert: str = Field(description="Create JIRA issue ") ) -> str:
-    # grafana_alert = json.loads(alert)
-    return "good"
+    grafana_alert = json.loads(alert)
+    return grafana_alert
         
     # except json.JSONDecodeError:
     #     return "Invalid JSON input"
