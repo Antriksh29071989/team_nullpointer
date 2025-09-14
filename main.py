@@ -9,7 +9,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv() 
 
-mcp = FastMCP("fastfix Server")
+mcp = FastMCP("Echo Server", port=3000, stateless_http=True, debug=True)
  
 
 @mcp.tool(title="grafana issue",
