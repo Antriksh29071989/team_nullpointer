@@ -53,7 +53,7 @@ def grafana(text: str = Field(description="The text to echo")) -> str:
 @mcp.tool(title="Jira Tool",
     description="create JIRA issue",
 )
-def jira(alert: str = Field(description="Create JIRA issue ") ) -> str:
+def jira(text: str = Field(description="Create JIRA issue ")) -> str:
     grafana_alert = json.loads(alert)
     return grafana_alert
         
