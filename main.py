@@ -4,8 +4,16 @@ MCP Server Template
 
 from mcp.server.fastmcp import FastMCP
 from pydantic import Field
-
 import mcp.types as types
+from datetime import datetime, timedelta
+import json
+import requests
+from requests.auth import HTTPBasicAuth
+import re
+import os
+
+from dotenv import load_dotenv
+load_dotenv() 
 
 mcp = FastMCP("Echo Server", port=3000, stateless_http=True, debug=True)
 
