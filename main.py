@@ -18,12 +18,14 @@ def echo(text: str = Field(description="The text to echo")) -> str:
     return text
 
 
-@mcp.tool(title="grafana issue",
-    description="Tool Description for the grafana")
-def grafana() -> str:
-    return "hello"
+@mcp.tool(
+    title="grafana Tool",
+    description="grafana the input text",
+)
+def grafana(text: str = Field(description="The text to echo")) -> str:
+    return text
     
-    
+
 #     # Generate one dummy issue
 #     now = datetime.now()
     
