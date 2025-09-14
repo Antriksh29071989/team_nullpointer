@@ -81,22 +81,23 @@ def jira(grafana_alert_json: str = Field(description="Create JIRA issue ") ) -> 
             "labels": grafana_alert.get('tags', []) 
             }
         }
+    
+    return "done"
+    # # Jira REST API endpoint
+    # jira_url = f"{JIRA_DOMAIN}/rest/api/2/issue/"
 
-    # Jira REST API endpoint
-    jira_url = f"{JIRA_DOMAIN}/rest/api/2/issue/"
-
-    # Send request
-    response = requests.post(
-        jira_url,
-        auth=HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN),
-        headers={"Content-Type": "application/json"},
-        data=json.dumps(jira_payload)
-    )
-    if response.status_code == 201:
-        issue_key = response.json()['key']
-        return f"Jira issue created successfully! Issue URL: {JIRA_DOMAIN}/browse/{issue_key}"
-    else:
-        return f"Failed to create Jira issue. Status: {response.status_code}, Response: {response.text}"
+    # # Send request
+    # response = requests.post(
+    #     jira_url,
+    #     auth=HTTPBasicAuth(JIRA_EMAIL, JIRA_API_TOKEN),
+    #     headers={"Content-Type": "application/json"},
+    #     data=json.dumps(jira_payload)
+    # )
+    # if response.status_code == 201:
+    #     issue_key = response.json()['key']
+    #     return f"Jira issue created successfully! Issue URL: {JIRA_DOMAIN}/browse/{issue_key}"
+    # else:
+    #     return f"Failed to create Jira issue. Status: {response.status_code}, Response: {response.text}"
 
 
 @mcp.resource(
