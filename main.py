@@ -12,7 +12,8 @@ load_dotenv()
 mcp = FastMCP("fastfix Server")
  
 
-@mcp.tool()
+@mcp.tool(title="grafana issue",
+    description="Tool Description for the grafana")
 async def get_grafana_issues() -> str:
     """Get dummy Grafana issue for demonstration.
     
