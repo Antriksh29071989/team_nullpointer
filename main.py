@@ -14,7 +14,7 @@ mcp = FastMCP("Echo Server", port=3000, stateless_http=True, debug=True)
 
 @mcp.tool(title="grafana issue",
     description="Tool Description for the grafana")
-async def get_grafana_issues() -> str:
+def get_grafana_issues() -> str:
     """Get dummy Grafana issue for demonstration.
     
     Returns a sample Grafana issue.
@@ -45,7 +45,7 @@ JIRA_EMAIL = os.getenv("JIRA_EMAIL")
 JIRA_API_TOKEN = os.getenv("JIRA_API_TOKEN")
 
 @mcp.tool()
-async def create_jira_issue(grafana_alert_json: str) -> str:
+def create_jira_issue(grafana_alert_json: str) -> str:
     """
     MCP tool to create a Jira issue from a Grafana alert JSON.
 
@@ -113,7 +113,7 @@ CONFLUENCE_API_TOKEN = os.getenv("CONFLUENCE_API_TOKEN")
 SPACE_KEY = "antriksh29071989"  # optional: limit search to a space
 
 @mcp.tool()
-async def search_confluence_solution(title: str) -> str:
+def search_confluence_solution(title: str) -> str:
     """
     Search Confluence for a solution to a given issue title or description snippet.
 
