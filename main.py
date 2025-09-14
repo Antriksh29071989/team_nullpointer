@@ -52,7 +52,7 @@ def grafana(text: str = Field(description="The text to echo")) -> str:
 
  @mcp.tool(title="Jira Tool",
     description="create JIRA issue",
-))
+)
 def create_jira_issue(grafana_alert_json: str = Field(description="Create JIRA issue ") ) -> str:
     """
     MCP tool to create a Jira issue from a Grafana alert JSON.
