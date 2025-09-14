@@ -50,39 +50,39 @@ def grafana(text: str = Field(description="The text to echo")) -> str:
    # Return as JSON string
     return json.dumps(issue)
 
-#  @mcp.tool(title="Jira Tool",
-#     description="create JIRA issue",
-# )
-# def jira(grafana_alert_json: str = Field(description="Create JIRA issue ") ) -> str:
-#     try:
-#         grafana_alert = json.loads(grafana_alert_json)
+ @mcp.tool(title="Jira Tool",
+    description="create JIRA issue",
+)
+def jira(grafana_alert_json: str = Field(description="Create JIRA issue ") ) -> str:
+    grafana_alert = json.loads(grafana_alert_json)
+    return grafana_alert
         
-#     except json.JSONDecodeError:
-#         return "Invalid JSON input"
+    # except json.JSONDecodeError:
+    #     return "Invalid JSON input"
 
-#     # Extract server name from description if possible
-#     server_match = re.search(r"server-[\w\-]+", grafana_alert.get("description", ""))
-#     server_name = server_match.group(0) if server_match else "Unknown Server"
+    # # Extract server name from description if possible
+    # server_match = re.search(r"server-[\w\-]+", grafana_alert.get("description", ""))
+    # server_name = server_match.group(0) if server_match else "Unknown Server"
 
-#     # Construct Jira payload
-#     jira_payload = {
-#         "fields": {
-#             "project": {"key": JIRA_PROJECT_KEY},
-#             "summary": f"{grafana_alert.get('title', 'No Title')} on {server_name}",
-#             "description": f"""{grafana_alert.get('description', '')}
-#             Grafana Issue ID: {grafana_alert.get('id', '')}
-#             Severity: {grafana_alert.get('severity', '')}
-#             Status: {grafana_alert.get('status', '')}
-#             Created: {grafana_alert.get('created_at', '')}
-#             Updated: {grafana_alert.get('updated_at', '')}
-#             Tags: {', '.join(grafana_alert.get('tags', []))}
-#             Assigned to: {grafana_alert.get('assigned_to', '')} """,
-#             "issuetype": {"name": "Epic"},
-#             "labels": grafana_alert.get('tags', []) 
-#             }
-#         }
+    # # Construct Jira payload
+    # jira_payload = {
+    #     "fields": {
+    #         "project": {"key": JIRA_PROJECT_KEY},
+    #         "summary": f"{grafana_alert.get('title', 'No Title')} on {server_name}",
+    #         "description": f"""{grafana_alert.get('description', '')}
+    #         Grafana Issue ID: {grafana_alert.get('id', '')}
+    #         Severity: {grafana_alert.get('severity', '')}
+    #         Status: {grafana_alert.get('status', '')}
+    #         Created: {grafana_alert.get('created_at', '')}
+    #         Updated: {grafana_alert.get('updated_at', '')}
+    #         Tags: {', '.join(grafana_alert.get('tags', []))}
+    #         Assigned to: {grafana_alert.get('assigned_to', '')} """,
+    #         "issuetype": {"name": "Epic"},
+    #         "labels": grafana_alert.get('tags', []) 
+    #         }
+    #     }
     
-#     return "done"
+    # return "done"
     # # Jira REST API endpoint
     # jira_url = f"{JIRA_DOMAIN}/rest/api/2/issue/"
 
