@@ -23,27 +23,24 @@ def echo(text: str = Field(description="The text to echo")) -> str:
     description="grafana the input text",
 )
 def grafana(text: str = Field(description="The text to echo")) -> str:
-    return text
     
-
-#     # Generate one dummy issue
-#     now = datetime.now()
+    now = datetime.now()
     
-#     issue = {
-#         "id": "GRAF-001",
-#         "title": "High CPU Usage Alert",
-#         "type": "Alert",
-#         "severity": "High",
-#         "status": "Open",
-#         "description": "CPU usage has exceeded 90% for the last 15 minutes on server-web-01",
-#         "created_at": (now - timedelta(hours=2)).isoformat(),
-#         "updated_at": (now - timedelta(minutes=30)).isoformat(),
-#         "assigned_to": "ops-team@company.com",
-#         "tags": ["infrastructure", "performance", "urgent"]
-#     }
+    issue = {
+        "id": "GRAF-001",
+        "title": "High CPU Usage Alert",
+        "type": "Alert",
+        "severity": "High",
+        "status": "Open",
+        "description": "CPU usage has exceeded 90% for the last 15 minutes on server-web-01",
+        "created_at": (now - timedelta(hours=2)).isoformat(),
+        "updated_at": (now - timedelta(minutes=30)).isoformat(),
+        "assigned_to": "ops-team@company.com",
+        "tags": ["infrastructure", "performance", "urgent"]
+    }
     
-#    # Return as JSON string
-#     return json.dumps(issue)
+   # Return as JSON string
+    return json.dumps(issue)
 
 
 @mcp.resource(
