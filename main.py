@@ -162,7 +162,7 @@ if __name__ == "__main__":
     try:
         print("started")
         # mcp.run(transport="stdio")  # or stdioz
-        mcp.run(transport="streamable-http")     # enable streaming if supported
+        mcp.run(transport="streamable-http")     # enable streaming if supporteds
     except Exception as e:
         # Log to stderr instead of stdout
         import traceback
